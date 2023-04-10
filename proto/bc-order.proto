@@ -2,10 +2,17 @@ syntax = "proto3";
 
 package order;
 
+// import "google/api/annotations.proto";
+
 option go_package = "./proto;bcorder";
 
 service BcOrder {
-	rpc Call(CallRequest) returns (CallResponse) {}
+	rpc Call(CallRequest) returns (CallResponse) {
+		//option (goole.api.http)={
+    //   post:"/bc-order/call"
+		//	 body:"*"
+		//};
+	}
 	rpc ClientStream(stream ClientStreamRequest) returns (ClientStreamResponse) {}
 	rpc ServerStream(ServerStreamRequest) returns (stream ServerStreamResponse) {}
 	rpc BidiStream(stream BidiStreamRequest) returns (stream BidiStreamResponse) {}

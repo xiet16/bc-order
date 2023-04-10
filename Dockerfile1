@@ -1,0 +1,23 @@
+#源镜像
+FROM golang:latest
+#设置环境
+ENV GO111MODULE=on \
+	GOPROXY="https://goproxy.cn,direct"
+
+RUN mkdir -p /app
+## 设置工作目录
+WORKDIR /app
+## 把以后（宿主机上）目录下的文件都复制到docker上刚创立的目录下
+COPY handler /app
+#go构建可执行文件
+RUN go build main.go
+#裸露端口
+EXPOSE 8000
+
+RUN chmod +x main
+ENTRYPOINT ["./main"]
+
+## 启动docker须要执行的文件
+#CMD go run main.go
+#最终运行docker的命令
+#ENTRYPOINT  ["./mygohttp"]
